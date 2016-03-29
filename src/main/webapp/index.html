@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
+    <title>Upload file using servlet 3.1, Non-blocking IO</title>
+    <script type="text/javascript">
+        function fileSelected() {
+            var file = document.getElementById('fileToUpload').files[0];
+            if (file) {
+                var fileSize = 0;
+                if (file.size > 1024 * 1024)
+                    fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
+                else
+                    fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
+
+                document.getElementById('fileName').innerHTML = 'Name: ' + file.name;
+                document.getElementById('fileSize').innerHTML = 'Name: ' + fileSize;
+                document.getElementById('fileType').innerHTML = 'Name: ' + file.type;
+            }
+        }
+    </script>
+</head>
+<body>
+    <form enctype="multipart/form-data" method="post" action="UploadServlet">
+        <label for="fileToUpload">Select a file to upload</label><br/>
+        <input type="file" name="fileToUpload" id="fileToUpload" onchange="fileSelected();"/>
+        <div id="fileName"></div>
+        <div id="fileSize"></div>
+        <div id="fileType"></div>
+        <div>
+            <input type="submit" value="Upload"/>
+        </div>
+    </form>
+</body>
+</html>
